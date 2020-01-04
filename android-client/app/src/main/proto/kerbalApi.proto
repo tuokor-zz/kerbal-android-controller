@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.tuokor.kerbal.api";
+option java_outer_classname = "KerbalProto";
+option objc_class_prefix = "RTG";
+
+package kerbal;
+
+service KerbalAPI {
+    rpc Vessel(stream Control) returns (stream VesselState) {}
+}
+
+message Control {
+    float pitch = 1;
+}
+
+message VesselState {
+    float pitch = 1;
+}
