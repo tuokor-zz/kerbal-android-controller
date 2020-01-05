@@ -3,6 +3,7 @@ package com.tuokor.kerbalclient
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.viewModelScope
 import com.tuokor.kerbal.api.Control
 import com.tuokor.kerbal.api.KerbalAPIGrpc
@@ -59,10 +60,16 @@ class KerbalViewModel : ViewModel() {
             val channel = ticker(100)
             intervalChannel = channel
             withContext(Dispatchers.IO) {
+                var previousPitchYaw : Pair<Float, Float>? = Pair(0.0f, 0.0f)
+                var previousRoll : Float? = 0.0f
                 for(unit in channel) {
-                    val pitchYaw = pitchAndYawData.value
-                    val roll = rollData.value
-                    sendControl(pitchYaw?.first, pitchYaw?.second, roll)
+                    if(previousPitchYaw != pitchAndYawData.value || previousRoll != rollData.value) {
+                        val pitchYaw = pitchAndYawData.value
+                        val roll = rollData.value
+                        sendControl(pitchYaw?.first, pitchYaw?.second, roll)
+                        previousPitchYaw = pitchYaw
+                        previousRoll = roll
+                    }
                 }
             }
 
