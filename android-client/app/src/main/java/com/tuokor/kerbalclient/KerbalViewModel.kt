@@ -44,7 +44,12 @@ class KerbalViewModel : ViewModel() {
 
         }
     }
-    fun sendPitch(pitch: Float) {
-        requestStream?.onNext(Control.newBuilder().setPitch(pitch).build())
+    fun sendControl(pitch: Float, yaw: Float) {
+        requestStream?.onNext(
+            Control.newBuilder()
+            .setPitch(pitch)
+            .setYaw(yaw)
+            .build()
+        )
     }
 }

@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
             val yaw = Math.cos(Math.toRadians(angle.toDouble())) * strength
             Log.d("JOY","$angle $strength pitch: $pitchStrength yaw: $yaw")
-            vm.sendPitch(pitchStrength.toFloat()/100)
+            vm.sendControl(pitchStrength.toFloat().div(100), yaw.toFloat().div(100))
 
         }
     }

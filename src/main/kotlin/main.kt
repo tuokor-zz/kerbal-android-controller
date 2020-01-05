@@ -33,8 +33,12 @@ class KerbalAPI(val spaceCenter: SpaceCenter) : KerbalAPIGrpc.KerbalAPIImplBase(
                     KerbalServer.logger.info("received value ${it.pitch}")
                     val vessel = spaceCenter.activeVessel
                     vessel.control.pitch = it.pitch
-                    //return back the pitch to client
-                    responseObserver?.onNext(VesselState.newBuilder().setPitch(vessel.control.pitch).build())
+                    vessel.control.yaw = it.yaw
+                    //return back values
+                    responseObserver?.onNext(VesselState.newBuilder()
+                        .setPitch(vessel.control.pitch)
+                        .setYaw(vessel.control.yaw)
+                        .build())
                 }
             }
 

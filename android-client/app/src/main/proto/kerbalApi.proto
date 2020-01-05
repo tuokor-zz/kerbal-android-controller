@@ -13,8 +13,10 @@ service KerbalAPI {
 
 message Control {
     float pitch = 1;
+    float yaw = 2;
 }
 
 message VesselState {
     float pitch = 1;
+    float yaw = 2;
 }
