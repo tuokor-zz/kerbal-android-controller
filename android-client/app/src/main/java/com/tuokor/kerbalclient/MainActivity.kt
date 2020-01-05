@@ -15,13 +15,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val vm = ViewModelProvider(this).get(KerbalViewModel::class.java)
         vm.connect()
-        joystickView.setOnMoveListener { angle, strength ->
+        pitch_yaw_stick.setFixedCenter(false)
+        pitch_yaw_stick.setOnMoveListener { angle, strength ->
             val pitchStrength = Math.sin(Math.toRadians(angle.toDouble())) * strength
 
             val yaw = Math.cos(Math.toRadians(angle.toDouble())) * strength
             Log.d("JOY","$angle $strength pitch: $pitchStrength yaw: $yaw")
-            vm.sendControl(pitchStrength.toFloat().div(100), yaw.toFloat().div(100))
+            vm.pitchAndYawData.postValue(Pair(pitchStrength.toFloat().div(100),yaw.toFloat().div(100)))
 
+
+        }
+        roll_stick.setOnMoveListener { angle, strength ->
+            Log.d("JOY2", "strength $strength angle $angle")
+            val sign = if(angle == 180) -1 else 1
+            val roll = strength.toFloat().div(100).times(sign)
+            Log.d("JOY2", "roll $roll")
+            vm.rollData.postValue(roll)
         }
     }
 }

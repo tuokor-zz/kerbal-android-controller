@@ -34,10 +34,12 @@ class KerbalAPI(val spaceCenter: SpaceCenter) : KerbalAPIGrpc.KerbalAPIImplBase(
                     val vessel = spaceCenter.activeVessel
                     vessel.control.pitch = it.pitch
                     vessel.control.yaw = it.yaw
+                    vessel.control.roll = it.roll
                     //return back values
                     responseObserver?.onNext(VesselState.newBuilder()
                         .setPitch(vessel.control.pitch)
                         .setYaw(vessel.control.yaw)
+                        .setRoll(vessel.control.roll)
                         .build())
                 }
             }

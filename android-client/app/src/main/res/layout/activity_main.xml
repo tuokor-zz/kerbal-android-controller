@@ -7,8 +7,8 @@
     tools:context=".MainActivity">
 
     <io.github.controlwear.virtual.joystick.android.JoystickView
-        android:id="@+id/joystickView"
-        android:layout_width="wrap_content"
+        android:id="@+id/pitch_yaw_stick"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:JV_backgroundColor="#009688"
         app:JV_borderColor="#00796B"
@@ -17,8 +17,36 @@
         app:JV_buttonSizeRatio="15%"
         app:JV_fixedCenter="false"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <io.github.controlwear.virtual.joystick.android.JoystickView
+        android:id="@+id/roll_stick"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:JV_backgroundColor="#009688"
+        app:JV_borderColor="#00796B"
+        app:JV_borderWidth="4dp"
+        app:JV_buttonColor="#FF6E40"
+        app:JV_buttonSizeRatio="15%"
+        app:JV_fixedCenter="false"
+        app:JV_buttonDirection="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/guideline2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.30" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.70" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
